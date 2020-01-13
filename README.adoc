@@ -1,0 +1,132 @@
+== OpenLiberty Maven NPE Showcase
+
+Run:
+
+[source,bash]
+----
+$ mvn clean liberty:dev
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ---------------< iol.github.bmhm:shiro-openliberty-npe >----------------
+[INFO] Building shiro-openliberty-npe 1.0.0-SNAPSHOT
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ shiro-openliberty-npe ---
+[INFO] Deleting $HOME/git/shiro-openliberty-npe/target
+[INFO]
+[INFO] --- liberty-maven-plugin:3.1:dev (default-cli) @ shiro-openliberty-npe ---
+[INFO] CWWKM2102I: Using artifact based assembly archive : io.openliberty:openliberty-kernel:null:19.0.0.12:zip.
+…
+[INFO]
+[INFO] Listening for transport dt_socket at address: 7777
+[INFO] Launching shiroServer (Open Liberty 19.0.0.12/wlp-1.0.35.cl191220191120-0300) on Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_45-b14 (en_US)
+[INFO] [AUDIT   ] CWWKE0001I: The server shiroServer has been launched.
+[INFO] [AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: $HOME/git/shiro-openliberty-npe/target/liberty/wlp/usr/servers/shiroServer/configDropins/overrides/liberty-plugin-variable-config.xml
+[INFO] [AUDIT   ] CWWKZ0058I: Monitoring dropins for applications.
+[INFO] [AUDIT   ] CWWKT0016I: Web application available (default_host): http://localhost:9080/openapi/ui/
+[INFO] [AUDIT   ] CWWKT0016I: Web application available (default_host): http://localhost:9080/openapi/
+[INFO] [AUDIT   ] CWWKT0016I: Web application available (default_host): http://localhost:9080/shiro-openliberty-npe/
+[INFO] [AUDIT   ] CWWKZ0001I: Application shiro-openliberty-npe started in 2.080 seconds.
+[INFO] [AUDIT   ] CWWKF0012I: The server installed the following features: [cdi-2.0, jaxrs-2.1, jaxrsClient-2.1, jndi-1.0, jsonp-1.1, mpConfig-1.2, mpOpenAPI-1.1, servlet-4.0].
+[INFO] [AUDIT   ] CWWKF0011I: The shiroServer server is ready to run a smarter planet. The shiroServer server started in 4.865 seconds.
+[INFO] CWWKM2015I: Match number: 1 is [1/13/20 20:57:03:509 CET] 00000021 com.ibm.ws.kernel.feature.internal.FeatureManager            A CWWKF0011I: The shiroServer server is ready to run a smarter planet. The shiroServer server started in 4.865 seconds..
+[INFO] 20:57:03.774 [Default Executor-thread-8] INFO  o.a.shiro.web.env.EnvironmentLoader - Starting Shiro environment initialization.
+[INFO] Press the Enter key to run tests on demand.
+[INFO] 20:57:04.072 [Default Executor-thread-8] INFO  o.a.shiro.web.env.EnvironmentLoader - Shiro environment initialized in 293 ms.
+----
+
+== Running the integration tests.
+
+At this point, press Enter to run the Integration test.
+
+[source,bash]
+----
+<Enter>
+[INFO] Running unit tests...
+[INFO] Unit tests finished.
+[INFO] Waiting up to 30 seconds for the application to start up...
+[INFO] CWWKM2010I: Searching for CWWKZ0001I.* in $HOME/git/shiro-openliberty-npe/target/liberty/wlp/usr/servers/shiroServer/logs/messages.log. This search will timeout after 30 seconds.
+[INFO] CWWKM2015I: Match number: 1 is [1/13/20 20:57:03:254 CET] 00000030 com.ibm.ws.app.manager.AppMessageHelper                      A CWWKZ0001I: Application shiro-openliberty-npe started in 2.080 seconds..
+[INFO] Running integration tests...
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running io.github.bmhm.shiro.servlet.HelloServiceIT
+20:57:09.673 [main] DEBUG i.g.b.shiro.servlet.HelloServiceIT - Executing query: GET to [http://localhost:9080/shiro-openliberty-npe/api/v1/hello}].
+[INFO] [WARNING ] Interceptor for {http://servlet.shiro.bmhm.github.io/}HelloService has thrown exception, unwinding now
+[INFO] java.lang.NullPointerException
+[INFO] [WARNING ] Exception in handleFault on interceptor org.apache.cxf.jaxrs.interceptor.JAXRSDefaultFaultOutInterceptor@13fac780
+[INFO] org.apache.cxf.interceptor.Fault
+[INFO] [ERROR   ] An unexpected error occurred during error handling. No further error processing will occur.
+[INFO] org.apache.cxf.interceptor.Fault
+[INFO] [ERROR   ] SRVE0777E: Exception thrown by application class 'org.apache.cxf.jaxrs.impl.AsyncResponseImpl.initContinuation:351'
+[INFO] java.lang.NullPointerException
+[INFO] 	at org.apache.cxf.jaxrs.impl.AsyncResponseImpl.initContinuation(AsyncResponseImpl.java:351)
+[INFO] 	at [internal classes]
+[INFO] 	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+[INFO] 	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+[INFO] 	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+[INFO] 	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+[INFO] 	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+[INFO] 	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+[INFO] 	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+[INFO] 	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+[INFO] 	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+[INFO] 	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+[INFO] 	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+[INFO] 	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+[INFO] 	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:201)
+[INFO] 	at [internal classes]
+[INFO]
+[INFO] [ERROR   ] SRVE0315E: An exception occurred: java.lang.Throwable: javax.servlet.ServletException: java.lang.NullPointerException
+[INFO] 	at com.ibm.ws.webcontainer.webapp.WebApp.handleRequest(WebApp.java:5075)
+[INFO] 	at [internal classes]
+[INFO] Caused by: javax.servlet.ServletException: java.lang.NullPointerException
+[INFO] 	at org.apache.shiro.web.servlet.AdviceFilter.cleanup(AdviceFilter.java:196)
+[INFO] 	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:148)
+[INFO] 	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+[INFO] 	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+[INFO] 	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+[INFO] 	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+[INFO] 	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+[INFO] 	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+[INFO] 	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+[INFO] 	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+[INFO] 	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+[INFO] 	at com.ibm.ws.webcontainer.filter.FilterInstanceWrapper.doFilter(FilterInstanceWrapper.java:201)
+[INFO] 	... 1 more
+[INFO] Caused by: java.lang.NullPointerException
+[INFO] 	at org.apache.cxf.jaxrs.impl.AsyncResponseImpl.initContinuation(AsyncResponseImpl.java:351)
+[INFO] 	at [internal classes]
+[INFO] 	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+[INFO] 	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+[INFO] 	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+[INFO] 	... 11 more
+[INFO]
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.859 s <<< FAILURE! - in io.github.bmhm.shiro.servlet.HelloServiceIT
+[ERROR] testServlet  Time elapsed: 0.734 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: HTTP GET failed ==> expected: <200> but was: <500>
+	at io.github.bmhm.shiro.servlet.HelloServiceIT.testServlet(HelloServiceIT.java:51)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   HelloServiceIT.testServlet:51 HTTP GET failed ==> expected: <200> but was: <500>
+[INFO] 
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[ERROR] Integration tests failed: There are test failures.
+
+Please refer to $HOME/git/shiro-openliberty-npe/target/failsafe-reports for the individual test results.
+Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[INFO] Press the Enter key to run tests on demand.
+^C
+----
+
+== Browse OpenAPI
+
+Just browse to http://localhost:9080/openapi/ or http://localhost:9080/openapi/ui/.
+
